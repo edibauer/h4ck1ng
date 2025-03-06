@@ -1,0 +1,1076 @@
+         __          _______   _____
+         \ \        / /  __ \ / ____|
+          \ \  /\  / /| |__) | (___   ___  __ _ _ __ ®
+           \ \/  \/ / |  ___/ \___ \ / __|/ _` | '_ \
+            \  /\  /  | |     ____) | (__| (_| | | | |
+             \/  \/   |_|    |_____/ \___|\__,_|_| |_|
+
+         WordPress Security Scanner by the WPScan Team
+                         Version 3.8.28
+       Sponsored by Automattic - https://automattic.com/
+       @_WPScan_, @ethicalhack3r, @erwan_lr, @firefart
+_______________________________________________________________
+
+[+] URL: https://gthookah.com/ [74.208.226.157]
+[+] Started: Mon Mar  3 00:19:45 2025
+
+Interesting Finding(s):
+
+[+] Headers
+ | Interesting Entries:
+ |  - server: nginx
+ |  - x-powered-by: PHP/8.2.27, PleskLin
+ |  - wpo-cache-status: cached
+ | Found By: Headers (Passive Detection)
+ | Confidence: 100%
+
+[+] robots.txt found: https://gthookah.com/robots.txt
+ | Found By: Robots Txt (Aggressive Detection)
+ | Confidence: 100%
+
+[+] XML-RPC seems to be enabled: https://gthookah.com/xmlrpc.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%
+ | References:
+ |  - http://codex.wordpress.org/XML-RPC_Pingback_API
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_ghost_scanner/
+ |  - https://www.rapid7.com/db/modules/auxiliary/dos/http/wordpress_xmlrpc_dos/
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_xmlrpc_login/
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_pingback_access/
+
+[+] This site has 'Must Use Plugins': https://gthookah.com/wp-content/mu-plugins/
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 80%
+ | Reference: http://codex.wordpress.org/Must_Use_Plugins
+
+[+] The external WP-Cron seems to be enabled: https://gthookah.com/wp-cron.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 60%
+ | References:
+ |  - https://www.iplocation.net/defend-wordpress-from-ddos
+ |  - https://github.com/wpscanteam/wpscan/issues/1299
+
+[+] WordPress version 6.7.2 identified (Latest, released on 2025-02-11).
+ | Found By: Rss Generator (Passive Detection)
+ |  - https://gthookah.com/feed/, <generator>https://wordpress.org/?v=6.7.2</generator>
+ |  - https://gthookah.com/comments/feed/, <generator>https://wordpress.org/?v=6.7.2</generator>
+
+[+] WordPress theme in use: Divi
+ | Location: https://gthookah.com/wp-content/themes/Divi/
+ | Latest Version: 4.27.4 (up to date)
+ | Last Updated: 2024-11-26T00:00:00.000Z
+ | Readme: https://gthookah.com/wp-content/themes/Divi/README.md
+ | Style URL: https://gthookah.com/wp-content/themes/Divi/style.css
+ | Style Name: Divi
+ | Style URI: http://www.elegantthemes.com/gallery/divi/
+ | Description: Smart. Flexible. Beautiful. Divi is the most powerful theme in our collection....
+ | Author: Elegant Themes
+ | Author URI: http://www.elegantthemes.com
+ |
+ | Found By: Urls In Homepage (Passive Detection)
+ | Confirmed By: Urls In 404 Page (Passive Detection)
+ |
+ | Version: 4.27.4 (80% confidence)
+ | Found By: Style (Passive Detection)
+ |  - https://gthookah.com/wp-content/themes/Divi/style.css, Match: 'Version: 4.27.4'
+
+[+] Enumerating Vulnerable Plugins (via Passive Methods)
+[+] Checking Plugin Versions (via Passive and Aggressive Methods)
+
+[i] Plugin(s) Identified:
+
+[+] advanced-woo-search
+ | Location: https://gthookah.com/wp-content/plugins/advanced-woo-search/
+ | Latest Version: 3.27
+ | Last Updated: 2025-02-17T12:53:00.000Z
+ |
+ | Found By: Urls In Homepage (Passive Detection)
+ | Confirmed By: Urls In 404 Page (Passive Detection)
+ |
+ | [!] 4 vulnerabilities identified:
+ |
+ | [!] Title: Advanced Woo Search < 1.70 - CSRF & XSS
+ |     Fixed in: 1.70
+ |     References:
+ |      - https://wpscan.com/vulnerability/17f23b9c-b447-438c-8950-55387eb70038
+ |      - https://plugins.trac.wordpress.org/changeset?reponame=&new=2079301%40advanced-woo-search&old=2077958%40advanced-woo-search
+ |
+ | [!] Title: Advanced Woo Search < 2.00 - SQL query leak in ajax search
+ |     Fixed in: 2.00
+ |     References:
+ |      - https://wpscan.com/vulnerability/41496477-0382-4ea0-b800-c2a1b65187c8
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-12070
+ |      - https://plugins.trac.wordpress.org/browser/advanced-woo-search/tags/1.99/includes/class-aws-search.php#L222
+ |
+ | [!] Title: Advanced Woo Search < 2.78 - Admin+ Stored Cross-Site Scripting
+ |     Fixed in: 2.78
+ |     References:
+ |      - https://wpscan.com/vulnerability/c63f4f09-79ec-492a-840e-80f3eac6917a
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2452
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/4278e9d7-aa1e-47a5-b715-09dae5156303?source=cve
+ |
+ | [!] Title: Advanced Woo Search < 2.97 - Reflected Cross-Site Scripting
+ |     Fixed in: 2.97
+ |     References:
+ |      - https://wpscan.com/vulnerability/5118f593-059a-4d36-8e16-6d969ce77270
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-0251
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/91358e40-e64f-4e8e-b5a3-7d2133db5fe9
+ |
+ | The version could not be determined.
+
+[+] google-listings-and-ads
+ | Location: https://gthookah.com/wp-content/plugins/google-listings-and-ads/
+ | Latest Version: 2.9.9
+ | Last Updated: 2025-02-18T15:02:00.000Z
+ |
+ | Found By: Urls In Homepage (Passive Detection)
+ |
+ | [!] 1 vulnerability identified:
+ |
+ | [!] Title: Google for WooCommerce < 2.8.7 - Information Disclosure via Publicly Accessible PHP Info File
+ |     Fixed in: 2.8.7
+ |     References:
+ |      - https://wpscan.com/vulnerability/df2f9f1a-b66e-4ce2-9fff-a04b38ab2974
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-10486
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/64bc7d47-6b63-4fd9-85d4-82126f86308a
+ |
+ | The version could not be determined.
+
+[+] popup-maker
+ | Location: https://gthookah.com/wp-content/plugins/popup-maker/
+ | Latest Version: 1.20.4
+ | Last Updated: 2025-01-30T03:21:00.000Z
+ |
+ | Found By: Urls In Homepage (Passive Detection)
+ | Confirmed By: Urls In 404 Page (Passive Detection)
+ |
+ | [!] 13 vulnerabilities identified:
+ |
+ | [!] Title: Popup Maker <= 1.6.4 - Authenticated Cross-Site Scripting (XSS)
+ |     Fixed in: 1.6.5
+ |     References:
+ |      - https://wpscan.com/vulnerability/400232f1-9ace-4b80-bf97-4ecf394b12f5
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-2284
+ |      - https://plugins.trac.wordpress.org/changeset/1697216/#file3
+ |      - https://jvn.jp/en/jp/JVN92921024/index.html
+ |
+ | [!] Title: Freemius Library < 2.2.4 - Subscriber+ Arbitrary Option Update 
+ |     Fixed in: 1.8.3
+ |     References:
+ |      - https://wpscan.com/vulnerability/6ff37c2e-e21d-4abc-bafe-8ca6a2c1ed76
+ |      - https://wptavern.com/freemius-patches-severe-vulnerability-in-library-used-by-popular-wordpress-plugins
+ |      - https://freemius.com/blog/sdk-security-vulnerability/
+ |      - https://github.com/Freemius/wordpress-sdk/commit/50a7ca3d921d59e1d2b39bb6ab3c6c7efde494b8
+ |      - https://plugins.trac.wordpress.org/changeset/2039381/
+ |
+ | [!] Title: Popup-Maker < 1.8.13 - Multiple Vulnerabilities
+ |     Fixed in: 1.8.13
+ |     References:
+ |      - https://wpscan.com/vulnerability/f9eb8bf2-85cd-413d-8234-fcd3c0456894
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17574
+ |      - https://web.archive.org/web/20191128065954/https://blog.redyops.com/wordpress-plugin-popup-maker/
+ |
+ | [!] Title: Popup Maker < 1.16.5 - Admin+ Stored Cross-Site Scripting
+ |     Fixed in: 1.16.5
+ |     References:
+ |      - https://wpscan.com/vulnerability/4d4709f3-ad38-4519-a24a-73bc04b20e52
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1104
+ |
+ | [!] Title: Popup Maker < 1.16.11 - Contributor+ Stored Cross Site Scripting
+ |     Fixed in: 1.16.11
+ |     References:
+ |      - https://wpscan.com/vulnerability/725f6ae4-7ec5-4d7c-9533-c9b61b59cc2b
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3690
+ |
+ | [!] Title: Popup Maker < 1.16.9 - Contributor+ Stored XSS via Shortcode
+ |     Fixed in: 1.16.9
+ |     References:
+ |      - https://wpscan.com/vulnerability/2660225a-e4c8-40f2-8c98-775ef2301212
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-4362
+ |
+ | [!] Title: Popup Maker < 1.16.9 - Contributor+ Stored XSS via Subscription Form
+ |     Fixed in: 1.16.9
+ |     References:
+ |      - https://wpscan.com/vulnerability/8bf8ebe8-1063-492d-a0f9-2f824408d0df
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-4381
+ |
+ | [!] Title: Popup Maker – Popup for opt-ins, lead gen, & more < 1.18.3 - Contributor+ Stored XSS
+ |     Fixed in: 1.18.3
+ |     References:
+ |      - https://wpscan.com/vulnerability/673562fe-e2be-407b-b6ef-b706f9ac769a
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-2336
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/40e1215c-ac00-4fd6-b428-a57cef95aed1
+ |
+ | [!] Title: Popup Maker < 1.19.1 - Admin+ Stored XSS
+ |     Fixed in: 1.19.1
+ |     References:
+ |      - https://wpscan.com/vulnerability/6a87cc25-bd7d-40e3-96f9-26646cd6f736
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-5561
+ |      - https://research.cleantalk.org/cve-2024-5561/
+ |
+ | [!] Title: Popup Maker < 1.19.1 - Contributor+ Stored XSS
+ |     Fixed in: 1.19.1
+ |     References:
+ |      - https://wpscan.com/vulnerability/f9810b7a-37cd-4cfc-b357-c0c91016cdb9
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-7054
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/73524687-7703-4912-aad5-2a31122ba9b2
+ |
+ | [!] Title: Popup Maker < 1.20.0 - Missing Authorization
+ |     Fixed in: 1.20.0
+ |     References:
+ |      - https://wpscan.com/vulnerability/da22e460-5276-47cb-9108-b1e4091dfe0b
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-47358
+ |      - https://patchstack.com/database/vulnerability/popup-maker/wordpress-popup-maker-plugin-1-19-2-broken-access-control-vulnerability
+ |
+ | [!] Title: Popup Maker < 1.20.3 - Contributor+ Stored XSS
+ |     Fixed in: 1.20.3
+ |     References:
+ |      - https://wpscan.com/vulnerability/b2feb2b5-9401-40be-ae8f-b468d15d615f
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-10583
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/5b4dc917-0d59-4163-a613-49afc1dc4d33
+ |
+ | [!] Title: Popup Maker < 1.20.3 - Contributor+ Stored XSS
+ |     Fixed in: 1.20.3
+ |     References:
+ |      - https://wpscan.com/vulnerability/cf28503b-76f0-4574-b2ba-fdb6779e28a2
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-24746
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/e50ef794-f551-4743-91b6-79509e9acf01
+ |
+ | The version could not be determined.
+
+[+] salesking
+ | Location: https://gthookah.com/wp-content/plugins/salesking/
+ |
+ | Found By: Urls In Homepage (Passive Detection)
+ | Confirmed By: Urls In 404 Page (Passive Detection)
+ |
+ | [!] 3 vulnerabilities identified:
+ |
+ | [!] Title: SalesKing < 1.6.30 - Unauthenticated Sensitive Information Exposure
+ |     Fixed in: 1.6.30
+ |     References:
+ |      - https://wpscan.com/vulnerability/e47a146a-8633-477a-b491-adf0dd4e3610
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-22154
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/70b00cfc-4a9b-442a-9c80-fd080924ca34
+ |
+ | [!] Title: SalesKing < 1.6.30 - Missing Authorization to Settings Change
+ |     Fixed in: 1.6.30
+ |     References:
+ |      - https://wpscan.com/vulnerability/45e6ec6c-e80a-4338-a3c7-6c910f92d55b
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-22156
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/c86f157e-e7f2-4b00-977c-c4cc7c2b3b0b
+ |
+ | [!] Title: SalesKing < 1.6.30 - Unauthenticated Privilege Escalation
+ |     Fixed in: 1.6.30
+ |     References:
+ |      - https://wpscan.com/vulnerability/f64f124e-f2a0-48d0-884e-b291cede45c0
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-22157
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/52198053-206c-4002-8e26-dd5b4850e151
+ |
+ | The version could not be determined.
+
+[+] ultimate-member
+ | Location: https://gthookah.com/wp-content/plugins/ultimate-member/
+ | Latest Version: 2.10.0
+ | Last Updated: 2025-02-18T15:35:00.000Z
+ |
+ | Found By: Urls In Homepage (Passive Detection)
+ | Confirmed By: Urls In 404 Page (Passive Detection)
+ |
+ | [!] 41 vulnerabilities identified:
+ |
+ | [!] Title: Ultimate Member < 1.0.84 - Multiple Vulnerabilities
+ |     Fixed in: 1.0.84
+ |     References:
+ |      - https://wpscan.com/vulnerability/5eabcb2a-c27a-4b33-9d07-6507e0007c50
+ |      - https://www.pritect.net/blog/ultimate-member-plugin-1-0-78-critical-security-vulnerability
+ |
+ | [!] Title: Ultimate Member 1.2.98-1.2.994 - Reflected Cross-Site Scripting (XSS)
+ |     Fixed in: 1.2.995
+ |     References:
+ |      - https://wpscan.com/vulnerability/3b6a5da0-511d-46f7-9b55-64d771b633a7
+ |      - https://g0blin.co.uk/g0blin-00056/
+ |
+ | [!] Title: Ultimate Member < 1.3.29 - Unauthenticated Reflected Cross-Site Scripting (XSS)
+ |     Fixed in: 1.3.29
+ |     References:
+ |      - https://wpscan.com/vulnerability/2d2a1116-85fa-4dc1-9d2b-bc6e7f786e34
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-8354
+ |      - https://seclists.org/bugtraq/2015/Dec/7
+ |      - https://www.immuniweb.com/advisory/HTB23277
+ |
+ | [!] Title: Ultimate Member < 1.3.65 - Local File Inclusion 
+ |     Fixed in: 1.3.65
+ |     References:
+ |      - https://wpscan.com/vulnerability/3ccc5483-2dd9-4925-95dd-3faa5cfdb951
+ |      - https://sumofpwn.nl/advisory/2016/ultimate_member_local_file_inclusion_vulnerability.html
+ |      - https://wordpress.org/plugins/ultimate-member/changelog/
+ |
+ | [!] Title: Ultimate Member < 1.3.76 - Unauthenticated Change Passwords
+ |     Fixed in: 1.3.76
+ |     References:
+ |      - https://wpscan.com/vulnerability/3bbcfb9d-d1d4-4979-9ff2-319b17a7d487
+ |      - https://www.pritect.net/blog/ultimate-member-1-3-76-critical-security-issue
+ |      - https://github.com/ultimatemember/ultimatemember/commit/c54e8d3c56027f1c87f62e54c722dc7c6e72f78a
+ |      - https://github.com/ultimatemember/ultimatemember/commit/b66c99bec200aec2eda5d53ebf8495e705933081
+ |
+ | [!] Title: Ultimate Member < 2.0.22 - Unauthenticated Arbitrary File Upload
+ |     Fixed in: 2.0.22
+ |     References:
+ |      - https://wpscan.com/vulnerability/aa753fc0-10f3-4934-94ae-dd8d713a0190
+ |      - https://wordpress.org/support/topic/appears-um-got-hacked-on-my-site/
+ |      - https://wordpress.org/support/topic/danger-security-issue/
+ |      - https://plugins.trac.wordpress.org/changeset/1922149/ultimate-member
+ |
+ | [!] Title: Ultimate Member < 2.0.22 - Authenticated Cross-Site Scripting (XSS)
+ |     Fixed in: 2.0.22
+ |     References:
+ |      - https://wpscan.com/vulnerability/0931056f-f13c-4eeb-874b-e708895fcb26
+ |      - https://plugins.trac.wordpress.org/changeset/1922149/ultimate-member
+ |
+ | [!] Title: Ultimate Member < 2.0.33 - Cross-Site Request Forgery (CSRF)
+ |     Fixed in: 2.0.33
+ |     References:
+ |      - https://wpscan.com/vulnerability/0b3afa2d-5eca-4046-896a-424e355c64a3
+ |      - https://plugins.trac.wordpress.org/changeset/1978789/ultimate-member
+ |
+ | [!] Title: Ultimate Member < 2.0.40 - Cross-Site Request Forgery (CSRF)
+ |     Fixed in: 2.0.40
+ |     References:
+ |      - https://wpscan.com/vulnerability/5db65c71-2769-459a-91ab-6c401d0d24ba
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-10673
+ |      - https://packetstormsecurity.com/files/152315/
+ |
+ | [!] Title: Ultimate Member < 2.0.46 - Multiple Vulnerabilities
+ |     Fixed in: 2.0.46
+ |     References:
+ |      - https://wpscan.com/vulnerability/7c54f599-70c0-42ee-9bb3-bd8d8010e08d
+ |      - https://blog.sucuri.net/2019/05/multiple-vulnerabilities-in-the-wordpress-ultimate-member-plugin.html
+ |      - https://plugins.trac.wordpress.org/changeset/2085539/ultimate-member
+ |
+ | [!] Title: Ultimate Member < 2.0.52 - CSRF and Stored XSS issues
+ |     Fixed in: 2.0.52
+ |     References:
+ |      - https://wpscan.com/vulnerability/fe9a9ae7-b547-4ac3-b309-93ab37d68112
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14946
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14947
+ |
+ | [!] Title: Ultimate Member <= 2.0.53 - Cross-Site Scripting (XSS)
+ |     Fixed in: 2.0.54
+ |     References:
+ |      - https://wpscan.com/vulnerability/e68c8f73-429e-423b-884e-d03b24142d14
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14945
+ |      - https://plugins.trac.wordpress.org/changeset/2126761/ultimate-member
+ |
+ | [!] Title: Ultimate Member < 2.0.4 - Multiple Issues
+ |     Fixed in: 2.0.4
+ |     References:
+ |      - https://wpscan.com/vulnerability/82d4e235-2af1-443d-a3ff-d1ed4869782e
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0585
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0586
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0587
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0588
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0590
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20965
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0589
+ |      - https://jvn.jp/en/jp/JVN28804532/
+ |
+ | [!] Title: Ultimate Member < 2.0.7 - Multiple Cross-Site Request Forgery Issues
+ |     Fixed in: 2.0.7
+ |     References:
+ |      - https://wpscan.com/vulnerability/67c2de20-0ec5-47cc-9458-a31bb6a4e9c8
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10233
+ |      - https://github.com/RiieCco/write-ups/tree/master/CVE-2018-10233
+ |
+ | [!] Title: Ultimate Member < 2.0.28 - Multiple XSS
+ |     Fixed in: 2.0.28
+ |     References:
+ |      - https://wpscan.com/vulnerability/01e8f289-004c-4817-a3c0-1e3043d1a55e
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-17866
+ |      - https://serhack.me/articles/ultimate-member-xss-security-issue
+ |
+ | [!] Title: Ultimate Member < 2.0.4 - Multiple XSS
+ |     Fixed in: 2.0.4
+ |     References:
+ |      - https://wpscan.com/vulnerability/1afcaa72-6063-41f1-baec-8f4801d9220a
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-6944
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-6943
+ |      - https://packetstormsecurity.com/files/146403/
+ |
+ | [!] Title: Ultimate Member < 2.0.18 - Authenticated Cross-Site Scripting (XSS)
+ |     Fixed in: 2.0.18
+ |     References:
+ |      - https://wpscan.com/vulnerability/f6fca349-013a-4ca7-9c91-4deb7f0127b7
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-13136
+ |
+ | [!] Title: Ultimate Member < 1.3.40 - Cross-Site Scripting (XSS)
+ |     Fixed in: 1.3.40
+ |     References:
+ |      - https://wpscan.com/vulnerability/4a26919e-055a-4173-b689-0d2705ff48e2
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-10872
+ |
+ | [!] Title: Ultimate Member < 1.3.18 - Cross-Site Scripting (XSS)
+ |     Fixed in: 1.3.18
+ |     References:
+ |      - https://wpscan.com/vulnerability/aca537fc-7ef6-496d-9984-027289f3bc2d
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-9304
+ |
+ | [!] Title: Ultimate Member < 2.1.3 - Insecure Direct Object Reference (IDOR)
+ |     Fixed in: 2.1.3
+ |     References:
+ |      - https://wpscan.com/vulnerability/476ccf2e-13f3-4834-9a2e-380d3d3c6729
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-6859
+ |      - https://github.com/ultimatemember/ultimatemember/commit/249682559012734a4f7d71f52609b2f301ea55b1
+ |
+ | [!] Title: Ultimate Member < 2.1.7 - Unauthenticated Open Redirect
+ |     Fixed in: 2.1.7
+ |     References:
+ |      - https://wpscan.com/vulnerability/97823f41-7614-420e-81b8-9e735e4c203f
+ |      - https://github.com/ultimatemember/ultimatemember/commit/c466e3d3d014a7e12850467372bdbabe6c474db2
+ |      - https://wordpress.org/support/topic/redirect_to-in-querystring-vulnerability/
+ |
+ | [!] Title: Ultimate Member < 2.1.12 - Unauthenticated Privilege Escalation via User Roles
+ |     Fixed in: 2.1.12
+ |     References:
+ |      - https://wpscan.com/vulnerability/33f059c5-58e5-44b9-bb27-793c3cedef3b
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-36157
+ |      - https://www.wordfence.com/blog/2020/11/critical-privilege-escalation-vulnerabilities-affect-100k-sites-using-ultimate-member-plugin/
+ |
+ | [!] Title: Ultimate Member < 2.1.12 - Authenticated Privilege Escalation via Profile Update
+ |     Fixed in: 2.1.12
+ |     References:
+ |      - https://wpscan.com/vulnerability/dd4c4ece-7206-4788-8747-f0c0f3ab0a53
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-36156
+ |      - https://www.wordfence.com/blog/2020/11/critical-privilege-escalation-vulnerabilities-affect-100k-sites-using-ultimate-member-plugin/
+ |
+ | [!] Title: Ultimate Member < 2.1.12 - Unauthenticated Privilege Escalation via User Meta
+ |     Fixed in: 2.1.12
+ |     References:
+ |      - https://wpscan.com/vulnerability/cf13b0f8-5815-4d27-a276-5eff8985fc0b
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-36155
+ |      - https://www.wordfence.com/blog/2020/11/critical-privilege-escalation-vulnerabilities-affect-100k-sites-using-ultimate-member-plugin/
+ |
+ | [!] Title: Ultimate Member < 2.1.20 - Authenticated Reflected Cross-Site Scripting (XSS)
+ |     Fixed in: 2.1.20
+ |     References:
+ |      - https://wpscan.com/vulnerability/35516555-c50c-486a-886c-df49c9e51e2c
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-24306
+ |
+ | [!] Title: Ultimate Member < 2.3.2 - Open Redirect
+ |     Fixed in: 2.3.2
+ |     References:
+ |      - https://wpscan.com/vulnerability/504f896c-44bb-4452-a66a-e15fc508e6c2
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1209
+ |      - https://www.wordfence.com/vulnerability-advisories/#CVE-2022-1209
+ |
+ | [!] Title: Ultimate Member < 2.4.0 - Subscriber+ Stored Cross-Site Scripting
+ |     Fixed in: 2.4.0
+ |     References:
+ |      - https://wpscan.com/vulnerability/f905d6e9-1901-4ff8-9960-6d765af78bd6
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1208
+ |
+ | [!] Title: Ultimate Member < 2.5.1 - Subscriber+ RCE
+ |     Fixed in: 2.5.1
+ |     References:
+ |      - https://wpscan.com/vulnerability/7a6fa0ab-4b7b-4d58-be4a-9d7714768f2d
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3384
+ |
+ | [!] Title: Ultimate Member < 2.5.1 - Admin+ RCE
+ |     Fixed in: 2.5.1
+ |     References:
+ |      - https://wpscan.com/vulnerability/20fd0da4-ee1a-4557-aee5-77953879b93c
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3383
+ |
+ | [!] Title: Ultimate Member < 2.5.1 - Contributor+ LFI via Traversal
+ |     Fixed in: 2.5.1
+ |     References:
+ |      - https://wpscan.com/vulnerability/1b0a48ad-05d1-4db2-a565-7261da0cbf8e
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3361
+ |
+ | [!] Title: Ultimate Member < 2.5.1 - Admin+ LFI via Traversal
+ |     Fixed in: 2.5.1
+ |     References:
+ |      - https://wpscan.com/vulnerability/89b6e16a-0a7b-4864-a755-8d6586524b79
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2445
+ |
+ | [!] Title: Ultimate Member < 2.6.7 - Unauthenticated Privilege Escalation
+ |     Fixed in: 2.6.7
+ |     References:
+ |      - https://wpscan.com/vulnerability/694235c7-4469-4ffd-a722-9225b19e98d7
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-3460
+ |      - https://blog.wpscan.com/hacking-campaign-actively-exploiting-ultimate-member-plugin/
+ |
+ | [!] Title: Ultimate Member < 2.6.1 - Form Duplication via CSRF
+ |     Fixed in: 2.6.1
+ |     References:
+ |      - https://wpscan.com/vulnerability/5273966e-9e0f-4687-8738-07ffa974571d
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-31216
+ |      - https://patchstack.com/database/vulnerability/ultimate-member/wordpress-ultimate-member-plugin-2-6-0-cross-site-request-forgery-csrf-vulnerability
+ |
+ | [!] Title: Ultimate Member 2.1.3 - 2.8.2 - Unauthenticated SQL Injection
+ |     Fixed in: 2.8.3
+ |     References:
+ |      - https://wpscan.com/vulnerability/dcca7ed0-b088-4b7d-9e22-07b858367975
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1071
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/005fa621-3c49-4c23-add5-d6b7a9110055
+ |
+ | [!] Title: Ultimate Member < 2.8.4 - Unauthenticated Stored Cross-Site Scripting
+ |     Fixed in: 2.8.4
+ |     References:
+ |      - https://wpscan.com/vulnerability/30703ccb-ce11-4e15-886d-2863f13213cb
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-2123
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/c8bc1653-8fee-468a-bb6d-f24959846ee5
+ |
+ | [!] Title: Ultimate Member < 2.8.7 - Cross-Site Request Forgery to Membership Status Change
+ |     Fixed in: 2.8.7
+ |     References:
+ |      - https://wpscan.com/vulnerability/2b670a80-2682-4b7f-a549-64a35345e630
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-8520
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/7ffddc03-d4ae-460e-972a-98804d947d09
+ |
+ | [!] Title: Ultimate Member < 2.8.7 - Authenticated (Contributor+) Stored Cross-Site Scripting
+ |     Fixed in: 2.8.7
+ |     References:
+ |      - https://wpscan.com/vulnerability/7488f9f3-03ea-4f4e-b5fb-c0dd02c5bb59
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-8519
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/9e394bb2-d505-4bf1-b672-fea3504bf936
+ |
+ | [!] Title: Ultimate Member < 2.9.0 - Missing Authorization to Authenticated (Subscriber+) Arbitrary User Profile Picture Update
+ |     Fixed in: 2.9.0
+ |     References:
+ |      - https://wpscan.com/vulnerability/54a53b30-4249-4559-85f8-7aeac2dc0df2
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-10528
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/0a9793b6-2186-46ef-b204-d8f8f154ebf3
+ |
+ | [!] Title: Ultimate Member – User Profile, Registration, Login, Member Directory, Content Restriction & Membership Plugin < 2.9.2 - Information Exposure
+ |     Fixed in: 2.9.2
+ |     References:
+ |      - https://wpscan.com/vulnerability/cb9c5ef8-51f8-4a46-ae56-23302c5980aa
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-0318
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/4ee149bf-ffa3-4906-8be2-9c3c40b28287
+ |
+ | [!] Title: Ultimate Member < 2.9.2 - Unauthenticated SQL Injection
+ |     Fixed in: 2.9.2
+ |     References:
+ |      - https://wpscan.com/vulnerability/31ef60db-4847-4623-a194-8722e668e6ab
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-0308
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/e3e5bb98-2652-499a-b8cd-4ebfe1c1d890
+ |
+ | [!] Title: Ultimate Member < 2.10.0 - Authenticated SQL Injection
+ |     Fixed in: 2.10.0
+ |     References:
+ |      - https://wpscan.com/vulnerability/90b5192a-ceee-4612-8e21-2341bae29cad
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-12276
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/846f9828-2f1f-4d08-abfb-909b8d634d8a
+ |
+ | The version could not be determined.
+
+[+] widget-google-reviews
+ | Location: https://gthookah.com/wp-content/plugins/widget-google-reviews/
+ | Latest Version: 5.3
+ | Last Updated: 2025-02-24T23:59:00.000Z
+ |
+ | Found By: Urls In Homepage (Passive Detection)
+ | Confirmed By: Urls In 404 Page (Passive Detection)
+ |
+ | [!] 3 vulnerabilities identified:
+ |
+ | [!] Title: Plugin for Google Reviews < 2.2.3 - Subscriber+ Widget Creation
+ |     Fixed in: 2.2.3
+ |     References:
+ |      - https://wpscan.com/vulnerability/1b417345-1345-4ca0-b6b0-98df0f1f3fa4
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-45369
+ |
+ | [!] Title: Plugin for Google Reviews < 2.2.4 - Subscriber+ SQLi
+ |     Fixed in: 2.2.4
+ |     References:
+ |      - https://wpscan.com/vulnerability/0d2d5d9d-46c1-4710-b87c-930b3645fe98
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-44580
+ |
+ | [!] Title: Plugin for Google Reviews < 3.2 - Contributor+ Stored Cross-Site Scripting via shortcode
+ |     Fixed in: 3.2
+ |     References:
+ |      - https://wpscan.com/vulnerability/f4bb5717-5381-42bf-838b-0ec9dea1d23f
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-6884
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/a8971d54-b54e-4e62-9db2-fa87d2564599
+ |
+ | The version could not be determined.
+
+[+] woo-variation-swatches
+ | Location: https://gthookah.com/wp-content/plugins/woo-variation-swatches/
+ | Latest Version: 2.2.0
+ | Last Updated: 2025-02-16T11:43:00.000Z
+ |
+ | Found By: Urls In Homepage (Passive Detection)
+ | Confirmed By: Urls In 404 Page (Passive Detection)
+ |
+ | [!] 1 vulnerability identified:
+ |
+ | [!] Title: Variation Swatches for WooCommerce < 1.0.62 - Reflected XSS
+ |     Fixed in: 1.0.62
+ |     References:
+ |      - https://wpscan.com/vulnerability/0a185eb0-116e-4f5c-818a-3031efe2cbec
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14774
+ |
+ | The version could not be determined.
+
+[+] woocommerce
+ | Location: https://gthookah.com/wp-content/plugins/woocommerce/
+ | Latest Version: 9.7.0
+ | Last Updated: 2025-02-24T12:17:00.000Z
+ |
+ | Found By: Urls In Homepage (Passive Detection)
+ | Confirmed By: Urls In 404 Page (Passive Detection)
+ |
+ | [!] 47 vulnerabilities identified:
+ |
+ | [!] Title: WooCommerce 2.0.17 - hide-wc-extensions-message Parameter Reflected XSS
+ |     Fixed in: 2.0.17
+ |     References:
+ |      - https://wpscan.com/vulnerability/6f59b2c9-1466-4c83-8967-cc1bb9b07ea6
+ |      - https://packetstormsecurity.com/files/123684/
+ |      - https://www.securityfocus.com/bid/63228/
+ |
+ | [!] Title: WooCommerce 2.0.12 - index.php calc_shipping_state Parameter XSS
+ |     Fixed in: 2.0.13
+ |     References:
+ |      - https://wpscan.com/vulnerability/05600919-3d11-4539-8850-3ac8fc6fe5a9
+ |      - https://packetstormsecurity.com/files/122465/
+ |
+ | [!] Title: WooCommerce < 2.2.3 - Reflected Cross-Site Scripting (XSS)
+ |     Fixed in: 2.2.3
+ |     References:
+ |      - https://wpscan.com/vulnerability/a2cc949c-838f-4e47-9ee8-07e3fb3cb049
+ |      - https://seclists.org/fulldisclosure/2014/Sep/59
+ |      - https://advisories.dxw.com/advisories/reflected-xss-in-woocommerce-excelling-ecommerce-allows-attackers-ability-to-do-almost-anything-an-admin-user-can-do/
+ |
+ | [!] Title: WooCommerce <= 2.2.2 - Reflected Cross-Site Scripting (XSS)
+ |     Fixed in: 2.2.3
+ |     References:
+ |      - https://wpscan.com/vulnerability/1c0eced1-f1ff-475b-ba41-2d821bec5094
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6313
+ |      - https://seclists.org/fulldisclosure/2014/Sep/59
+ |
+ | [!] Title: WooCommerce <= 2.2.10 - Cross-Site Scripting (XSS)
+ |     Fixed in: 2.2.11
+ |     References:
+ |      - https://wpscan.com/vulnerability/301c83b2-a326-42f5-ad27-92845716dcd3
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2069
+ |      - https://seclists.org/fulldisclosure/2015/Feb/75
+ |      - https://packetstormsecurity.com/files/130458/
+ |
+ | [!] Title: WooCommerce 2.3 - 2.3.5 - SQL Injection
+ |     Fixed in: 2.3.6
+ |     References:
+ |      - https://wpscan.com/vulnerability/7f1ab25f-4171-48a6-a67c-fa6020c7a0d6
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2329
+ |      - http://www.wordfence.com/blog/2015/03/woocommerce-sql-injection-vulnerability/
+ |
+ | [!] Title: WooCommerce 2.0.20-2.3.10 - Object Injection / XXE
+ |     Fixed in: 2.3.11
+ |     References:
+ |      - https://wpscan.com/vulnerability/9d4d6f49-5e02-4424-860e-f41453c9d7cf
+ |      - https://blog.sucuri.net/2015/06/security-advisory-object-injection-vulnerability-in-woocommerce.html
+ |
+ | [!] Title: WooCommerce <= 2.4.8 - Authenticated Cross-Site Scripting (XSS)
+ |     Fixed in: 2.4.9
+ |     References:
+ |      - https://wpscan.com/vulnerability/b0761276-0a27-4a9b-96ff-faf751a5e77a
+ |      - https://fortiguard.com/zeroday/FG-VD-15-095
+ |
+ | [!] Title: WooCommerce <= 2.6.2 - Authenticated Cross-Site Scripting (XSS)
+ |     Fixed in: 2.6.3
+ |     References:
+ |      - https://wpscan.com/vulnerability/39988889-a8f4-4434-a9e9-598f926cf0b0
+ |      - https://woocommerce.wordpress.com/2016/07/19/woocommerce-2-6-3-fixsecurity-release-notes/
+ |      - https://sumofpwn.nl/advisory/2016/persistent_cross_site_scripting_in_woocommerce_using_image_metadata__exif_.html
+ |
+ | [!] Title: WooCommerce <= 2.6.3 - Stored Cross Site Scripting (XSS) via REST API
+ |     Fixed in: 2.6.4
+ |     References:
+ |      - https://wpscan.com/vulnerability/d4f7dff0-7391-4448-95dd-327f0803a9b8
+ |      - https://sumofpwn.nl/advisory/2016/persistent_cross_site_scripting_in_woocommerce_wordpress_plugin.html
+ |      - https://seclists.org/fulldisclosure/2016/Sep/20
+ |      - https://hackerone.com/reports/152692
+ |
+ | [!] Title: WooCommerce <= 2.6.8 - Authenticated Tax-Rate CSV XSS
+ |     Fixed in: 2.6.9
+ |     References:
+ |      - https://wpscan.com/vulnerability/037bf4b0-889e-4af3-8ede-efbd5f71f3e3
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-10112
+ |      - https://fortiguard.com/zeroday/FG-VD-15-020
+ |      - https://www.fortinet.com/blog/threat-research/woocommerce-tax-rates-cross-site-scripting-vulnerability2.html
+ |
+ | [!] Title: WooCommerce <= 3.2.3 - Authenticated PHP Object Injection
+ |     Fixed in: 3.2.4
+ |     References:
+ |      - https://wpscan.com/vulnerability/1d0470df-4671-47ac-8d87-a165e8f7d502
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-18356
+ |      - https://woocommerce.wordpress.com/2017/11/16/woocommerce-3-2-4-security-fix-release-notes/
+ |      - https://blog.ripstech.com/2018/woocommerce-php-object-injection/
+ |
+ | [!] Title: WooCommerce <= 3.4.4 - Potential Object Injection
+ |     Fixed in: 3.4.5
+ |     References:
+ |      - https://wpscan.com/vulnerability/13a534b4-97bd-48e1-b936-cc57c9c56396
+ |      - https://woocommerce.wordpress.com/2018/08/29/woocommerce-3-4-5-security-fix-release-notes/
+ |
+ | [!] Title: WooCommerce <= 3.4.5 - Authenticated Object Injection
+ |     Fixed in: 3.4.6
+ |     References:
+ |      - https://wpscan.com/vulnerability/b9af34f0-9012-41a1-870b-89d4e5d2eb27
+ |      - https://medium.com/websec/woocommerce-and-azis-with-scotch-bc9d561377e1
+ |      - https://github.com/woocommerce/woocommerce/commit/4738162c25bb244631574d4230533b470f0ee8df#diff-dc3a1c9d68e161cfe6566b05971ec631
+ |      - https://woocommerce.wordpress.com/2018/10/11/woocommerce-3-4-6-security-fix-release-notes/
+ |
+ | [!] Title: WooCommerce <= 3.4.5 - Authenticated File Deletion to Privilege Escalation
+ |     Fixed in: 3.4.6
+ |     References:
+ |      - https://wpscan.com/vulnerability/ad7f42a7-1ffb-4613-864a-6ae3249d8e10
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20714
+ |      - https://blog.ripstech.com/2018/wordpress-design-flaw-leads-to-woocommerce-rce/
+ |      - https://woocommerce.wordpress.com/2018/10/11/woocommerce-3-4-6-security-fix-release-notes/
+ |      - https://www.ripstech.com/php-security-calendar-2018/
+ |
+ | [!] Title: WooCommerce <= 3.4.5 - Authenticated Stored XSS
+ |     Fixed in: 3.4.6
+ |     References:
+ |      - https://wpscan.com/vulnerability/7275a176-d579-471a-8492-df8edbdf27de
+ |      - https://www.ripstech.com/php-security-calendar-2018/#day-1
+ |      - https://woocommerce.wordpress.com/2018/10/11/woocommerce-3-4-6-security-fix-release-notes/
+ |
+ | [!] Title: WooCommerce <= 3.4.5 - Authenticated Phar Deserialization
+ |     Fixed in: 3.4.6
+ |     References:
+ |      - https://wpscan.com/vulnerability/9567f575-529d-4d66-980c-73cba6726673
+ |      - https://www.ripstech.com/php-security-calendar-2018/#day-3
+ |      - https://woocommerce.wordpress.com/2018/10/11/woocommerce-3-4-6-security-fix-release-notes/
+ |
+ | [!] Title: WooCommerce <= 3.5.0 - Authenticated Stored XSS
+ |     Fixed in: 3.5.1
+ |     References:
+ |      - https://wpscan.com/vulnerability/446d5271-c32a-4298-be0d-8e2f60681a71
+ |      - https://www.ripstech.com/php-security-calendar-2018/#Day23
+ |
+ | [!] Title: WooCommerce <= 3.5.4 - Stored Cross-Site Scripting (XSS)
+ |     Fixed in: 3.5.5
+ |     References:
+ |      - https://wpscan.com/vulnerability/661a5cd0-f152-4a33-8de8-55fa9f73c8d4
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9168
+ |      - https://woocommerce.wordpress.com/2019/02/20/woocommerce-3-5-5-security-fix-release/
+ |      - https://fortiguard.com/zeroday/FG-VD-19-022
+ |      - https://github.com/woocommerce/woocommerce/commit/ffa230de9091cde33f1d60ffc971533e8682ba8f
+ |      - https://github.com/woocommerce/woocommerce/commit/7def966e4fe626cca274b5a714e07ac36f2655a6
+ |
+ | [!] Title: WooCommerce <= 3.6.4 - Cross-Site Request Forgery (CSRF) & File Type Check
+ |     Fixed in: 3.6.5
+ |     References:
+ |      - https://wpscan.com/vulnerability/4760a717-3f2d-4491-bfb1-ae0754c3bda5
+ |      - https://plugins.trac.wordpress.org/changeset?reponame=&new=2116363%40woocommerce&old=2096035%40woocommerce
+ |      - https://twitter.com/WooCommerce/status/1147543261814374401
+ |      - https://woocommerce.wordpress.com/2019/07/02/woocommerce-3-6-5-security-release/
+ |      - https://blog.ripstech.com/2019/woocommerce-csrf-to-stored-xss/
+ |
+ | [!] Title: WooCommerce < 4.1.0 - Unescaped Metadata when Duplicating Products
+ |     Fixed in: 4.1.0
+ |     References:
+ |      - https://wpscan.com/vulnerability/e938f544-d043-4831-888f-52d94e7c6c3d
+ |      - https://plugins.trac.wordpress.org/browser/woocommerce/tags/4.1.0/readme.txt?rev=2298743
+ |
+ | [!] Title: WooCommerce < 4.2.1 - Potential Cross-Site Scripting (XSS) via SelectWoo
+ |     Fixed in: 4.2.1
+ |     References:
+ |      - https://wpscan.com/vulnerability/8dac6eec-6573-4de0-b37f-ff09834c50bd
+ |      - https://woocommerce.wordpress.com/2020/06/22/woocommerce-4-2-1-security-and-fix-release/
+ |      - https://github.com/woocommerce/woocommerce/commit/40f7c2d474e242440b2fb9a886353f5a8772a210
+ |      - https://github.com/woocommerce/woocommerce/commit/14a26aca2cde9c81ade02bdc6dd0a34e184a4202
+ |      - https://github.com/woocommerce/selectWoo/releases/tag/1.0.7
+ |
+ | [!] Title: WooCommerce < 4.6.2 - Guest Account Creation
+ |     Fixed in: 4.6.2
+ |     References:
+ |      - https://wpscan.com/vulnerability/3f3094ed-23ea-4bfb-847a-d06d8a7e7cee
+ |      - https://developer.woocommerce.com/2020/11/05/developer-advisory-spam-orders-and-accounts-from-bots/
+ |      - https://github.com/woocommerce/woocommerce/commit/e711a447feaf3d6020204e4319fdd5ba47c3f0b9
+ |
+ | [!] Title: WooCommerce < 4.7.0 - Arbitrary Order Status Disclosure via IDOR
+ |     Fixed in: 4.7.0
+ |     References:
+ |      - https://wpscan.com/vulnerability/c420f079-5803-47ec-9844-28b0785c35f0
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29156
+ |      - https://github.com/Ko-kn3t/CVE-2020-29156
+ |
+ | [!] Title: Woocommerce < 5.2.0 - Authenticated Stored Cross-Site Scripting (XSS)
+ |     Fixed in: 5.2.0
+ |     References:
+ |      - https://wpscan.com/vulnerability/6d262555-7ae4-4e36-add6-4baa34dc3010
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-24323
+ |      - https://www.youtube.com/watch?v=YXNYkVbaAfo
+ |
+ | [!] Title: Woocommerce 3.3 to 5.5 - Authenticated Blind SQL Injection
+ |     Fixed in: 5.5.1
+ |     References:
+ |      - https://wpscan.com/vulnerability/1212fec8-1fde-41e5-af70-abdd7ffe5379
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-32790
+ |      - https://woocommerce.com/posts/critical-vulnerability-detected-july-2021/
+ |      - https://twitter.com/WooCommerce/status/1415442447312764931
+ |      - https://www.wordfence.com/blog/2021/07/critical-sql-injection-vulnerability-patched-in-woocommerce/
+ |      - https://noc.org/2021/07/15/serious-sqli-in-woocommerce/
+ |      - https://blog.wpscan.com/critical-woocommerce-vulnerabilities/
+ |      - https://github.com/woocommerce/woocommerce/security/advisories/GHSA-7vx5-x39w-q24g
+ |
+ | [!] Title: WooCommerce < 5.7.0  & WooCommerce Admin < 2.6.4 - Analytics Report Leaks
+ |     Fixed in: 5.7.0
+ |     References:
+ |      - https://wpscan.com/vulnerability/6f1ecd1e-5363-44df-b9c7-a67dc9398261
+ |      - https://developer.woocommerce.com/2021/09/22/important-security-patch-released-in-woocommerce/
+ |
+ | [!] Title: WooCommerce < 6.2.1 - Subscriber+ Arbitrary Comment Deletion
+ |     Fixed in: 6.2.1
+ |     References:
+ |      - https://wpscan.com/vulnerability/b76dbf37-a0a2-48cf-bd85-3ebbc2f394dd
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0775
+ |      - https://plugins.trac.wordpress.org/changeset/2683324
+ |      - https://developer.woocommerce.com/2022/02/22/woocommerce-6-2-1-security-fix/
+ |
+ | [!] Title: WooCommerce < 6.2.1 - Path Traversal via Importers
+ |     Fixed in: 6.2.1
+ |     References:
+ |      - https://wpscan.com/vulnerability/26e169da-4020-4b3d-8bee-af01bd853791
+ |      - https://plugins.trac.wordpress.org/changeset/2683324
+ |      - https://developer.woocommerce.com/2022/02/22/woocommerce-6-2-1-security-fix/
+ |
+ | [!] Title: WooCommerce < 6.3.1 - Orders Marked as Paid (via PayPal Standard Gateway)
+ |     Fixed in: 6.3.1
+ |     References:
+ |      - https://wpscan.com/vulnerability/bdda03d0-d657-4e12-8996-40152194c607
+ |      - https://developer.woocommerce.com/2022/03/10/woocommerce-3-5-10-6-3-1-security-releases/
+ |
+ | [!] Title: WooCommerce < 6.6.0 - Admin+ Stored HTML Injection
+ |     Fixed in: 6.6.0
+ |     References:
+ |      - https://wpscan.com/vulnerability/0316e5f3-3302-40e3-8ff4-be3423a3be7b
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2099
+ |
+ | [!] Title: WooCommerce < 7.9 - Unauthenticated Sensitive Information Disclosure
+ |     Fixed in: 7.9
+ |     References:
+ |      - https://wpscan.com/vulnerability/d1cec296-b5df-4cea-8c0d-d03a975cb6af
+ |      - https://hackerone.com/reports/2057736
+ |
+ | [!] Title: WooCommerce < 8.1.1 - Shop Manager+ User Metadata Disclosure
+ |     Fixed in: 8.1.1
+ |     References:
+ |      - https://wpscan.com/vulnerability/bb9f355a-be33-41b1-af36-0a30c24bec8c
+ |      - https://hackerone.com/reports/1702658
+ |      - https://developer.woocommerce.com/2023/09/16/woocommerce-vulnerability-reintroduced-from-7-0-1/
+ |
+ | [!] Title: WooCommerce < 7.9.0 - Sensitive Information Exposure
+ |     Fixed in: 7.9.0
+ |     References:
+ |      - https://wpscan.com/vulnerability/9c9498b0-d42e-4ce0-b299-ba5d08058a75
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/7b2d1879-c337-41c9-9f47-f9c2fe8e5928
+ |
+ | [!] Title: WooCommerce <= 8.1.1 & WooCommerce Blocks <= 11.1.1 - Authenticated (Contributor+) Stored Cross-Site Scripting via Featured Image alt Attribute
+ |     Fixed in: 8.2.0
+ |     References:
+ |      - https://wpscan.com/vulnerability/b8e9b8cf-8d13-4fd8-8e1e-ee35a01baf05
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-47777
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/525dec5b-b457-483c-ab2d-09dd320edcaa
+ |
+ | [!] Title: WooCommerce < 7.0.1 - Authenticated(Shop Manager+) Sensitive Information Exposure
+ |     Fixed in: 7.0.1
+ |     References:
+ |      - https://wpscan.com/vulnerability/45f56af8-b238-41a5-b7d5-bd40982d5ed7
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/f1efcff5-3af6-4c44-9654-b917523419aa
+ |
+ | [!] Title: WooCommerce < 8.3.0 - Cross-Site Request Forgery
+ |     Fixed in: 8.3.0
+ |     References:
+ |      - https://wpscan.com/vulnerability/d11e7996-3417-4b1b-a090-2f4d31cdd11d
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-52222
+ |      - https://patchstack.com/database/vulnerability/woocommerce/wordpress-woocommerce-plugin-8-2-2-cross-site-request-forgery-csrf-vulnerability
+ |
+ | [!] Title: WooCommerce < 8.4.0 - Reflected Cross-Site Scripting
+ |     Fixed in: 8.4.0
+ |     References:
+ |      - https://wpscan.com/vulnerability/0b51f01a-24d9-4101-bdcf-728b21efc5ed
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/43810a17-89b4-44f5-887e-1ad0989ea5b4
+ |
+ | [!] Title: WooCommerce < 8.6 - Contributor+ Private/Draft Products Access
+ |     Fixed in: 8.6
+ |     References:
+ |      - https://wpscan.com/vulnerability/a7735feb-876e-461c-9a56-ea6067faf277
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-1310
+ |
+ | [!] Title: WooCommerce < 8.6.0 - Cross-Site Request Forgery
+ |     Fixed in: 8.6.0
+ |     References:
+ |      - https://wpscan.com/vulnerability/14d03287-6571-46d3-89af-0ad64dad6d33
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-22155
+ |      - https://patchstack.com/database/vulnerability/woocommerce/wordpress-woocommerce-plugin-8-5-2-cross-site-request-forgery-csrf-vulnerability
+ |
+ | [!] Title: WooCommerce 8.8.0 - 8.9.2 - Reflected XSS
+ |     Fixed in: 8.9.3
+ |     References:
+ |      - https://wpscan.com/vulnerability/f4d603ce-a101-4505-aad1-12a40959860d
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-37297
+ |      - https://developer.woocommerce.com/2024/06/10/developer-advisory-xss-vulnerability-8-8-0/
+ |
+ | [!] Title: WooCommerce < 9.0.0 - Shop Manager+ Content Injection
+ |     Fixed in: 9.0.0
+ |     References:
+ |      - https://wpscan.com/vulnerability/44887eb0-ee24-4368-ba5e-6ed189ba8e5d
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-35777
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/ee8436c2-3dda-481c-92b3-cc2ba8fc1993
+ |
+ | [!] Title: WooCommerce < 9.1.4 - Stored XSS
+ |     Fixed in: 9.1.4
+ |     References:
+ |      - https://wpscan.com/vulnerability/d72df81e-c0e8-4705-8bd1-67a71f78a47e
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-39666
+ |
+ | [!] Title: WooCommerce < 9.2 - Contributor+ Stored XSS
+ |     Fixed in: 9.2
+ |     References:
+ |      - https://wpscan.com/vulnerability/c966c5ea-3cb4-4dc0-ac85-8d534c83804b
+ |      - https://developer.woocommerce.com/2024/08/21/woocommerce-9-2-a-better-experience-for-all-users/
+ |
+ | [!] Title: WooCommerce < 9.1.0 - Unauthenticated HTML Injection
+ |     Fixed in: 9.1.0
+ |     References:
+ |      - https://wpscan.com/vulnerability/ccef1e59-40df-4645-aacb-4bb9c4b96456
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-9944
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/b5dfe2a5-612f-4e6c-a639-4afcff2ffa4c
+ |
+ | [!] Title: WooCommerce < 9.4.3 - Reflected XSS
+ |     Fixed in: 9.4.3
+ |     Reference: https://wpscan.com/vulnerability/505aa04b-3969-4fea-a296-a6af7ef71409
+ |
+ | [!] Title: WooCommerce < 9.4.3 - Unauthenticated Order Creation
+ |     Fixed in: 9.4.3
+ |     Reference: https://wpscan.com/vulnerability/d51f5bb7-ba87-4ce8-adcf-6bef4217b5db
+ |
+ | The version could not be determined.
+
+[+] wpforms-lite
+ | Location: https://gthookah.com/wp-content/plugins/wpforms-lite/
+ | Latest Version: 1.9.4.1
+ | Last Updated: 2025-02-27T13:02:00.000Z
+ |
+ | Found By: Urls In Homepage (Passive Detection)
+ |
+ | [!] 13 vulnerabilities identified:
+ |
+ | [!] Title: Contact Form by WPForms < 1.4.8 - Authenticated Stored Cross-Site Scripting (XSS)
+ |     Fixed in: 1.4.8
+ |     References:
+ |      - https://wpscan.com/vulnerability/0a50ad3d-6062-47d9-9602-bfded802200d
+ |      - https://www.ripstech.com/php-security-calendar-2018/
+ |
+ | [!] Title: Contact Form by WPForms < 1.4.8.1 - Unauthenticated Cross-Site Scripting (XSS)
+ |     Fixed in: 1.4.8.1
+ |     References:
+ |      - https://wpscan.com/vulnerability/008f8eb8-0643-4e59-bd29-acdc1e6f7a06
+ |      - https://www.ripstech.com/php-security-calendar-2018/
+ |      - https://plugins.trac.wordpress.org/changeset/1935751/wpforms-lite
+ |      - https://demo.ripstech.com/issue/96/136/1/52191/details
+ |
+ | [!] Title: Contact Form by WPForms < 1.5.9 - Authenticated Cross-Site Scripting (XSS)
+ |     Fixed in: 1.5.9
+ |     References:
+ |      - https://wpscan.com/vulnerability/0d5c51d8-a834-4680-9939-b6d37fd3d237
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-10385
+ |      - https://www.exploit-db.com/exploits/48245/
+ |      - https://www.jinsonvarghese.com/stored-xss-vulnerability-found-in-wpforms-plugin/
+ |      - https://packetstormsecurity.com/files/156874/
+ |      - https://www.getastra.com/blog/911/plugin-exploit/stored-xss-vulnerability-found-in-wpforms-plugin/
+ |
+ | [!] Title: Contact Form by WPForms < 1.6.0.2 - Authenticated Stored Cross-Site Scripting (XSS)
+ |     Fixed in: 1.6.0.2
+ |     References:
+ |      - https://wpscan.com/vulnerability/006047c3-2d46-4075-91fe-b55f4b7a4b06
+ |      - https://fortiguard.com/zeroday/FG-VD-20-063
+ |      - https://plugins.trac.wordpress.org/changeset/2309431/wpforms-lite/trunk/includes/admin/builder/panels/class-fields.php?old=2288506
+ |
+ | [!] Title: Contact Form by WPForms < 1.7.5.5 - Admin+ Arbitrary File Access
+ |     Fixed in: 1.7.5.5
+ |     Reference: https://wpscan.com/vulnerability/faa56a23-66bc-4dd7-a5b0-81ea6365d75a
+ |
+ | [!] Title: Contact Form by WPForms < 1.8.1.3 - Reflected XSS
+ |     Fixed in: 1.8.1.3
+ |     References:
+ |      - https://wpscan.com/vulnerability/9a7e7557-0fdb-46d7-97c1-ace6f3e18b9e
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-30500
+ |
+ | [!] Title: Contact Form by WPForms – Drag & Drop Form Builder for WordPress < 1.8.8.2 - Unauthenticated Price Manipulation
+ |     Fixed in: 1.8.8.2
+ |     References:
+ |      - https://wpscan.com/vulnerability/f8d86b51-e8d2-4419-9a97-202535e20a54
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-3649
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/68a509ae-9943-4b9a-8ede-2b5732e96e6d
+ |
+ | [!] Title: WPForms < 1.9.1.6 - Admin+ Stored XSS
+ |     Fixed in: 1.9.1.6
+ |     References:
+ |      - https://wpscan.com/vulnerability/467af13e-25bd-425c-929d-5dd06e28d595
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-7056
+ |      - https://research.cleantalk.org/cve-2024-7056/
+ |
+ | [!] Title: WPForms – Easy Form Builder for WordPress < 1.9.2.1 - Cross-Site Request Forgery (CSRF) to Plugin's Log Deletion
+ |     Fixed in: 1.9.2.1
+ |     References:
+ |      - https://wpscan.com/vulnerability/d0877cf0-a940-4d1b-ae44-7601ac3132a0
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-10593
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/6d1ea80a-a1ce-4964-8dde-f3ed2df5537c
+ |
+ | [!] Title: WPForms < 1.9.2.3 - Admin+ Stored XSS
+ |     Fixed in: 1.9.2.3
+ |     References:
+ |      - https://wpscan.com/vulnerability/82989909-9745-4c9a-abc7-c1adf8c2b047
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-11223
+ |      - https://research.cleantalk.org/cve-2024-11223
+ |
+ | [!] Title: WPForms 1.8.4 - 1.9.2.1 - Missing Authorization to Authenticated (Subscriber+) Payment Refund and Subscription Cancellation
+ |     Fixed in: 1.9.2.2
+ |     References:
+ |      - https://wpscan.com/vulnerability/4e8abd1c-47ff-4f74-a9dd-d827b0fa57c8
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-11205
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/66898509-a93c-4dc3-bf01-1743daaa0ff1
+ |
+ | [!] Title: Contact Form by WPForms < 1.9.2.3 - Contributor+ Custom Form Theme Creation
+ |     Fixed in: 1.9.2.3
+ |     References:
+ |      - https://wpscan.com/vulnerability/ed5fd5ae-1c77-43e4-ab2c-99689f586938
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-56276
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/95de9099-6071-46d8-a7c9-bb2c1caa6b38
+ |
+ | [!] Title: WPForms Lite < 1.9.3.2 - Authenticated (Contributor+) Stored Cross-Site Scripting via fieldHTML Parameter
+ |     Fixed in: 1.9.3.2
+ |     References:
+ |      - https://wpscan.com/vulnerability/9a3659ed-f3e1-4360-b91f-08b34397e9cc
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-13403
+ |      - https://www.wordfence.com/threat-intel/vulnerabilities/id/92ea6a89-b14f-4252-b886-e219c1bb658d
+ |
+ | The version could not be determined.
+
+[+] Enumerating Users (via Passive and Aggressive Methods)
+ Brute Forcing Author IDs - Time: 00:00:12 <================================================================================================================> (10 / 10) 100.00% Time: 00:00:12
+
+[i] User(s) Identified:
+
+[+] Arif Hussain
+ | Found By: Rss Generator (Passive Detection)
+
+[+] WPScan DB API OK
+ | Plan: free
+ | Requests Done (during the scan): 15
+ | Requests Remaining: 10
+
+[+] Finished: Mon Mar  3 00:22:13 2025
+[+] Requests Done: 119
+[+] Cached Requests: 8
+[+] Data Sent: 19.339 KB
+[+] Data Received: 1.935 MB
+[+] Memory used: 263.387 MB
+[+] Elapsed time: 00:02:28

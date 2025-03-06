@@ -1,0 +1,179 @@
+{
+  "main": {
+    "id": "61ccf388a235ea23",
+    "type": "split",
+    "children": [
+      {
+        "id": "da8fb84d36e78ccc",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "594695d88aeb99a5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Reverse Shells, Bind Shells y Forward Shells.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Reverse Shells, Bind Shells y Forward Shells"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "6312a24f6ec1cdf6",
+    "type": "split",
+    "children": [
+      {
+        "id": "bd9499fff7ad06b7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3b31ea3774bc1331",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "9884121e5f813186",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "3c7e0169f789e2d9",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "262e796d38d24830",
+    "type": "split",
+    "children": [
+      {
+        "id": "51e80f0eb99d99bb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7599c1b2d3b991d7",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Reverse Shells, Bind Shells y Forward Shells.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Reverse Shells, Bind Shells y Forward Shells"
+            }
+          },
+          {
+            "id": "4b65e93ea804ac70",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Reverse Shells, Bind Shells y Forward Shells.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Reverse Shells, Bind Shells y Forward Shells"
+            }
+          },
+          {
+            "id": "23b3227e32b5bfa1",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "897bd0a3a8b5c96e",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Reverse Shells, Bind Shells y Forward Shells.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Reverse Shells, Bind Shells y Forward Shells"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "594695d88aeb99a5",
+  "lastOpenFiles": [
+    "img/Pasted image 20250303205913.png",
+    "Reverse Shells, Bind Shells y Forward Shells.md",
+    "img/Pasted image 20250303205618.png",
+    "img/Pasted image 20250303205416.png",
+    "img"
+  ]
+}
