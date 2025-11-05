@@ -1,0 +1,37 @@
+# Nmap 7.94SVN scan initiated Sat Oct 11 00:47:14 2025 as: nmap -sCV -p80,139,445 -oN targeted 192.168.1.70
+Nmap scan report for 192.168.1.70 (192.168.1.70)
+Host is up (0.0011s latency).
+
+PORT    STATE SERVICE     VERSION
+80/tcp  open  http        Apache httpd 2.4.7 ((Ubuntu))
+|_http-server-header: Apache/2.4.7 (Ubuntu)
+|_http-title: Apache2 Ubuntu Default Page: It works
+139/tcp open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+445/tcp open  netbios-ssn Samba smbd 4.3.9-Ubuntu (workgroup: WORKGROUP)
+MAC Address: 94:E6:F7:EA:2C:4D (Intel Corporate)
+Service Info: Host: XVWA
+
+Host script results:
+|_clock-skew: mean: 1h59m59s, deviation: 3h27m50s, median: 0s
+| smb2-security-mode: 
+|   3:1:1: 
+|_    Message signing enabled but not required
+| smb-os-discovery: 
+|   OS: Windows 6.1 (Samba 4.3.9-Ubuntu)
+|   Computer name: xvwa
+|   NetBIOS computer name: XVWA\x00
+|   Domain name: \x00
+|   FQDN: xvwa
+|_  System time: 2025-10-11T00:47:26-06:00
+| smb2-time: 
+|   date: 2025-10-11T06:47:26
+|_  start_date: N/A
+|_nbstat: NetBIOS name: XVWA, NetBIOS user: <unknown>, NetBIOS MAC: <unknown> (unknown)
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sat Oct 11 00:47:26 2025 -- 1 IP address (1 host up) scanned in 12.01 seconds
