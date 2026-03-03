@@ -31,5 +31,8 @@ cp id_rsa.pub authorized_keys
 # attack machine
 # create a private and public key, copy public jey like authorized key and put it into .ssh vitims machine 
 
+# Using private key
+ssh -i id_rsa edibauer@192.168.1.17
+
 
 ```
